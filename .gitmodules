@@ -1,0 +1,6 @@
+[submodule "3dViewer"]
+	path = 3dViewer
+	url = https://github.com/IosephKnecht/3dViewer.git
+[submodule "barcode-reader"]
+	path = barcode-reader
+	url = https://github.com/IosephKnecht/barcode-reader.git
