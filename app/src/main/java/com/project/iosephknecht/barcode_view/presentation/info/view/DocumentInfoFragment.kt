@@ -19,6 +19,7 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
 
     companion object {
         private const val BARCODE_VALUE = "barcode_value"
+        const val TAG = "document_fragment_info"
 
         fun newInstance(barcodeValue: String) = DocumentInfoFragment().apply {
             arguments?.apply {
@@ -43,8 +44,10 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
     override fun onStart() {
         super.onStart()
 
+        val barcodeValue = arguments?.getString(BARCODE_VALUE, "")
+
         view_btn.setOnClickListener {
-            // TODO : replace on 3dViewFragment
+            presenter!!.obtainDocumentInfoModel(barcodeValue!!)
         }
     }
 }

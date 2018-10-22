@@ -7,10 +7,10 @@ class ViewPresenter(private val interactor: ViewContract.Interactor) : AbstractP
     ViewContract.Presenter, ViewContract.Listener {
 
     override fun obtainModel(id: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        interactor.getModel(id)
     }
 
     override fun onObtainModel(modelArray: ByteArray) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        viewModel!!.modelArray = modelArray
     }
 }

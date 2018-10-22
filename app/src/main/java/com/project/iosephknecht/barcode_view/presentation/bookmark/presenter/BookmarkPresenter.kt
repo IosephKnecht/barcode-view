@@ -5,7 +5,8 @@ import com.project.iosephknecht.barcode_view.presentation.bookmark.BookmarkContr
 import com.project.iosephknecht.barcode_view.viper.presenter.AbstractPresenter
 import com.project.iosephknecht.barcode_view.viper.view.AndroidComponent
 
-class BookmarkPresenter(private val interactor: BookmarkContract.Interactor) : AbstractPresenter<BookmarkContract.ViewModel>(),
+class BookmarkPresenter(private val interactor: BookmarkContract.Interactor,
+                        private val router: BookmarkContract.Router) : AbstractPresenter<BookmarkContract.ViewModel>(),
     BookmarkContract.Presenter, BookmarkContract.Listener {
 
     override fun attachView(viewModel: BookmarkContract.ViewModel, androidComponent: AndroidComponent) {
@@ -16,7 +17,11 @@ class BookmarkPresenter(private val interactor: BookmarkContract.Interactor) : A
         interactor.getBookmarkList()
     }
 
-    override fun onObtainBookmarkList(bookmarkList: List<Bookmark>) {
+    override fun jumpToInfoFragment(id: Long) {
+        //router.showInfoFragment(id)
+    }
 
+    override fun onObtainBookmarkList(bookmarkList: List<Bookmark>) {
+        viewModel!!.bookmarkList = bookmarkList
     }
 }

@@ -22,10 +22,10 @@ class DocumentInfoPresenter(private val interactor: DocumentInfoContract.Interac
     }
 
     override fun obtainDocumentInfoModel(barcodeValue: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        interactor.searchBarcodeValue(barcodeValue)
     }
 
     override fun onObtainDocumentInfoModel(documentInfoModel: DocumentInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        viewModel!!.description = documentInfoModel.description!!
     }
 }
