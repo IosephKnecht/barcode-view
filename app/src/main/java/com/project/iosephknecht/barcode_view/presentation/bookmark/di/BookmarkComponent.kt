@@ -1,5 +1,8 @@
 package com.project.iosephknecht.barcode_view.presentation.bookmark.di
 
-interface BookmarkComponent {
+import com.project.iosephknecht.barcode_view.presentation.bookmark.BookmarkContract
 
+interface BookmarkComponent {
+    fun getPresenter(): BookmarkContract.Presenter
+    fun getViewModel(): BookmarkContract.ViewModel
 }
