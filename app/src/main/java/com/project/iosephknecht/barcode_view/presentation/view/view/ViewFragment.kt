@@ -33,13 +33,20 @@ class ViewFragment : AbstractFragment<ViewContract.ViewModel, ViewContract.Prese
     private lateinit var bindingComponent: FragmentViewBinding
 
     override fun injectDi() {
+        val rootId = arguments?.getLong(DOCUMENT_MODEL_ID, -1)
+
         diComponent = AppDelegate.presentationComponent
-            .viewSubcomponent(ViewModule(context!!))
+            .viewSubcomponent(ViewModule(context!!, rootId))
     }
 
     override fun createPresenter() = diComponent.getPresenter()
 
     override fun createViewModel() = diComponent.getViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel!!.addOnPropertyChangedCallback(vmObserver)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bindingComponent = DataBindingUtil.inflate(inflater, R.layout.fragment_view, container, false)
@@ -48,22 +55,18 @@ class ViewFragment : AbstractFragment<ViewContract.ViewModel, ViewContract.Prese
 
     override fun onStart() {
         super.onStart()
-
         bindingComponent.viewModel = viewModel!!
-
-        viewModel!!.addOnPropertyChangedCallback(vmObserver)
-
-        val rootId = arguments?.getLong(DOCUMENT_MODEL_ID, -1)
-
-        if (rootId != -1L) presenter!!.obtainModel(rootId!!)
     }
 
     override fun onStop() {
         view_container.removeAllViews()
         view_container.destroyDrawingCache()
-        viewModel!!.removeOnPropertyChangedCallback(vmObserver)
-
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        viewModel!!.removeOnPropertyChangedCallback(vmObserver)
+        super.onDestroy()
     }
 
     private val vmObserver: Observable.OnPropertyChangedCallback by lazy {

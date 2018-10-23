@@ -47,7 +47,9 @@ class HostFragment : Fragment() {
                 val barcode = data!!.getParcelableExtra<Barcode>(BarcodeCaptureActivity.BarcodeObject)
 
                 fragmentManager!!.beginTransaction()
-                    .replace(R.id.fragment_container, DocumentInfoFragment.newInstance(barcode.displayValue))
+                    .replace(R.id.fragment_container, DocumentInfoFragment.newInstance(barcode.displayValue),
+                        DocumentInfoFragment.TAG)
+                    .addToBackStack(null)
                     .commit()
             }
         } else {

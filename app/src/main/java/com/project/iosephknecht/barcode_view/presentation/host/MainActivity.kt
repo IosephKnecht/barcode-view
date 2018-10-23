@@ -13,11 +13,12 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val fragment = fragmentManager!!.findFragmentByTag(HostFragment.TAG)
+        val fragment = supportFragmentManager!!.findFragmentByTag(HostFragment.TAG)
 
         if (fragment == null) {
             supportFragmentManager!!.beginTransaction()
-                .replace(R.id.fragment_container, HostFragment.newInstance())
+                .replace(R.id.fragment_container, HostFragment.newInstance(), HostFragment.TAG)
+                .addToBackStack(null)
                 .commit()
         }
     }

@@ -7,9 +7,17 @@ import com.project.iosephknecht.barcode_view.viper.viewModel.MvpViewModel
 
 interface ViewContract {
 
+    enum class State {
+        IDLE, INIT
+    }
+
     interface ViewModel : MvpViewModel {
         var modelArray: ByteArray
             @Bindable get
+
+        var state: State
+
+        fun redrawModel()
     }
 
     interface Presenter : MvpPresenter<ViewModel> {

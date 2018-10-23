@@ -7,10 +7,16 @@ import com.project.iosephknecht.barcode_view.BR
 
 class ViewViewModel : AbstractViewModel(), ViewContract.ViewModel {
 
+    override var state = ViewContract.State.IDLE
+
     override var modelArray: ByteArray = byteArrayOf()
         @Bindable get() = field
         set(value) {
             field = value
             notifyPropertyChanged(BR.modelArray)
         }
+
+    override fun redrawModel() {
+        notifyPropertyChanged(BR.modelArray)
+    }
 }
