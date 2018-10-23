@@ -3,6 +3,7 @@ package com.project.iosephknecht.barcode_view.presentation.view.viewModel
 import android.databinding.Bindable
 import com.project.iosephknecht.barcode_view.presentation.view.ViewContract
 import com.project.iosephknecht.barcode_view.viper.viewModel.AbstractViewModel
+import com.project.iosephknecht.barcode_view.BR
 
 class ViewViewModel : AbstractViewModel(), ViewContract.ViewModel {
 
@@ -10,6 +11,6 @@ class ViewViewModel : AbstractViewModel(), ViewContract.ViewModel {
         @Bindable get() = field
         set(value) {
             field = value
-            notifyChange()
+            notifyPropertyChanged(BR.modelArray)
         }
 }

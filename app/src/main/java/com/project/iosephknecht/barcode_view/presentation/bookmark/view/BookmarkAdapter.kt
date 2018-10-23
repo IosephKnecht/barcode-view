@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.project.iosephknecht.barcode_view.data.presentation.Bookmark
 import com.project.iosephknecht.barcode_view.databinding.ItemBookmarkBinding
 
-class BookmarkAdapter(private val clickListener: (() -> Unit))
+class BookmarkAdapter(private val clickListener: ((Long) -> Unit))
     : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
     var bookmarkList = listOf<Bookmark>()
 

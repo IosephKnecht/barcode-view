@@ -5,11 +5,14 @@ import com.project.iosephknecht.barcode_view.data.presentation.DocumentInfo
 import com.project.iosephknecht.barcode_view.viper.interactor.MvpInteractor
 import com.project.iosephknecht.barcode_view.viper.presenter.MvpPresenter
 import com.project.iosephknecht.barcode_view.viper.router.MvpRouter
+import com.project.iosephknecht.barcode_view.viper.view.AndroidComponent
 import com.project.iosephknecht.barcode_view.viper.viewModel.MvpViewModel
 
 interface DocumentInfoContract {
 
     interface ViewModel : MvpViewModel {
+        var rootId: Long
+
         var description: String
             @Bindable get
 
@@ -18,6 +21,7 @@ interface DocumentInfoContract {
 
     interface Presenter : MvpPresenter<ViewModel> {
         fun obtainDocumentInfoModel(barcodeValue: String)
+        fun jumpToViewFragment(rootId: Long)
     }
 
     interface Listener : MvpInteractor.Listener {
@@ -30,5 +34,7 @@ interface DocumentInfoContract {
 
     interface RouterListener : MvpRouter.Listener
 
-    interface Router : MvpRouter<RouterListener>
+    interface Router : MvpRouter<RouterListener> {
+        fun showView(androidComponent: AndroidComponent, rootId: Long)
+    }
 }

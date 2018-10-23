@@ -6,14 +6,17 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.vision.barcode.Barcode
 import com.project.iosephknecht.barcode_reader.BarcodeCaptureActivity
 import com.project.iosephknecht.barcode_reader.RequestCode
 import com.project.iosephknecht.barcode_view.R
+import com.project.iosephknecht.barcode_view.presentation.info.view.DocumentInfoFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_host.*
 
 class HostFragment : Fragment() {
 
-    private val BARCODE_REQUEST_CODE = 221347
+    private val BARCODE_REQUEST_CODE = 22134
 
     companion object {
         const val TAG = "host_fragment"
@@ -39,7 +42,14 @@ class HostFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == BARCODE_REQUEST_CODE && resultCode == RequestCode.SUCCESS) {
-            // TODO: jump to documentScreenModule
+            val fragment = fragmentManager!!.findFragmentByTag(DocumentInfoFragment.TAG)
+            if (fragment == null) {
+                val barcode = data!!.getParcelableExtra<Barcode>(BarcodeCaptureActivity.BarcodeObject)
+
+                fragmentManager!!.beginTransaction()
+                    .replace(R.id.fragment_container, DocumentInfoFragment.newInstance(barcode.displayValue))
+                    .commit()
+            }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }

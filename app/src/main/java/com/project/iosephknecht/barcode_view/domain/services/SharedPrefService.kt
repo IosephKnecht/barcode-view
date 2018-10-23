@@ -1,4 +1,4 @@
-package com.project.iosephknecht.barcode_view.domain
+package com.project.iosephknecht.barcode_view.domain.services
 
 import android.content.Context
 import com.google.gson.Gson
