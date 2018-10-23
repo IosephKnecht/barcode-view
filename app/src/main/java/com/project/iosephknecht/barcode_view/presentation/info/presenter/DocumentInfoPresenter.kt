@@ -6,16 +6,24 @@ import com.project.iosephknecht.barcode_view.viper.presenter.AbstractPresenter
 import com.project.iosephknecht.barcode_view.viper.view.AndroidComponent
 
 class DocumentInfoPresenter(private val interactor: DocumentInfoContract.Interactor,
-                            private val router: DocumentInfoContract.Router) : AbstractPresenter<DocumentInfoContract.ViewModel>(),
+                            private val router: DocumentInfoContract.Router,
+                            private val barcodeValue: String?) : AbstractPresenter<DocumentInfoContract.ViewModel>(),
     DocumentInfoContract.Presenter, DocumentInfoContract.Listener {
 
     override fun attachView(viewModel: DocumentInfoContract.ViewModel, androidComponent: AndroidComponent) {
         super.attachView(viewModel, androidComponent)
 
         interactor.setListener(this)
+
+        when (viewModel.state) {
+            DocumentInfoContract.State.IDLE -> obtainDocumentInfoModel(barcodeValue!!)
+            else -> {
+            }
+        }
     }
 
     override fun detachView() {
+        androidComponent = null
         super.detachView()
     }
 
@@ -34,5 +42,6 @@ class DocumentInfoPresenter(private val interactor: DocumentInfoContract.Interac
     override fun onObtainDocumentInfoModel(documentInfoModel: DocumentInfo) {
         viewModel!!.description = documentInfoModel.description!!
         viewModel!!.rootId = documentInfoModel.rootId
+        viewModel!!.state = DocumentInfoContract.State.INIT
     }
 }

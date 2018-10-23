@@ -10,13 +10,17 @@ import com.project.iosephknecht.barcode_view.viper.viewModel.MvpViewModel
 
 interface DocumentInfoContract {
 
+    enum class State {
+        IDLE, INIT
+    }
+
     interface ViewModel : MvpViewModel {
+        var state: State
+
         var rootId: Long
 
         var description: String
             @Bindable get
-
-        var modelArray: ByteArray
     }
 
     interface Presenter : MvpPresenter<ViewModel> {

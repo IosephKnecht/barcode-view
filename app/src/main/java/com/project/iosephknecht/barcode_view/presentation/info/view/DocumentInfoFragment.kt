@@ -31,8 +31,10 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
     }
 
     override fun injectDi() {
+        val barcodeValue = arguments?.getString(BARCODE_VALUE, "")
+
         diComponent = AppDelegate.presentationComponent
-            .documentInfoSubmodule(DocumentInfoModule())
+            .documentInfoSubmodule(DocumentInfoModule(barcodeValue))
     }
 
     override fun createPresenter() = diComponent.getPresenter()
@@ -48,10 +50,6 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
         super.onStart()
 
         bindingComponent.viewModel = viewModel!!
-
-        val barcodeValue = arguments?.getString(BARCODE_VALUE, "")
-
-        presenter!!.obtainDocumentInfoModel(barcodeValue!!)
 
         view_btn.setOnClickListener {
             presenter!!.jumpToViewFragment(viewModel!!.rootId)

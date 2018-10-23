@@ -11,7 +11,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class DocumentInfoModule {
+class DocumentInfoModule(private val barcodeValue: String?) {
 
     @Provides
     @ModuleScope
@@ -23,7 +23,7 @@ class DocumentInfoModule {
     @ModuleScope
     fun providePresenter(interactor: DocumentInfoContract.Interactor,
                          router: DocumentInfoContract.Router): DocumentInfoContract.Presenter {
-        return DocumentInfoPresenter(interactor, router)
+        return DocumentInfoPresenter(interactor, router, barcodeValue)
     }
 
     @Provides
