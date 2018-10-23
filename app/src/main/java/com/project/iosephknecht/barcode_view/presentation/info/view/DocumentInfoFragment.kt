@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.project.iosephknecht.barcode_view.R
+import com.project.iosephknecht.barcode_view.application.AppDelegate
 import com.project.iosephknecht.barcode_view.databinding.FragmentInfoBinding
 import com.project.iosephknecht.barcode_view.presentation.info.DocumentInfoContract
 import com.project.iosephknecht.barcode_view.presentation.info.di.DocumentInfoComponent
+import com.project.iosephknecht.barcode_view.presentation.info.di.DocumentInfoModule
 import com.project.iosephknecht.barcode_view.viper.view.AbstractFragment
 import kotlinx.android.synthetic.main.fragment_info.*
 
@@ -19,16 +21,18 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
 
     companion object {
         private const val BARCODE_VALUE = "barcode_value"
+        const val TAG = "document_fragment_info"
 
         fun newInstance(barcodeValue: String) = DocumentInfoFragment().apply {
-            arguments?.apply {
+            arguments = Bundle().apply {
                 putString(BARCODE_VALUE, barcodeValue)
             }
         }
     }
 
     override fun injectDi() {
-        //diComponent =
+        diComponent = AppDelegate.presentationComponent
+            .documentInfoSubmodule(DocumentInfoModule())
     }
 
     override fun createPresenter() = diComponent.getPresenter()
@@ -43,8 +47,14 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
     override fun onStart() {
         super.onStart()
 
+        bindingComponent.viewModel = viewModel!!
+
+        val barcodeValue = arguments?.getString(BARCODE_VALUE, "")
+
+        presenter!!.obtainDocumentInfoModel(barcodeValue!!)
+
         view_btn.setOnClickListener {
-            // TODO : replace on 3dViewFragment
+            presenter!!.jumpToViewFragment(viewModel!!.rootId)
         }
     }
 }

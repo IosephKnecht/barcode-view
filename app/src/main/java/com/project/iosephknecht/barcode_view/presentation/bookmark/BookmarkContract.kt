@@ -5,6 +5,7 @@ import com.project.iosephknecht.barcode_view.data.presentation.Bookmark
 import com.project.iosephknecht.barcode_view.viper.interactor.MvpInteractor
 import com.project.iosephknecht.barcode_view.viper.presenter.MvpPresenter
 import com.project.iosephknecht.barcode_view.viper.router.MvpRouter
+import com.project.iosephknecht.barcode_view.viper.view.AndroidComponent
 import com.project.iosephknecht.barcode_view.viper.viewModel.MvpViewModel
 
 interface BookmarkContract {
@@ -16,6 +17,7 @@ interface BookmarkContract {
 
     interface Presenter : MvpPresenter<ViewModel> {
         fun obtainBookmarkList()
+        fun jumpToInfoFragment(id: Long)
     }
 
     interface Listener : MvpInteractor.Listener {
@@ -29,5 +31,6 @@ interface BookmarkContract {
     interface RouterListener : MvpRouter.Listener
 
     interface Router : MvpRouter<RouterListener> {
+        fun showInfoFragment(androidComponent: AndroidComponent, id: Long)
     }
 }
