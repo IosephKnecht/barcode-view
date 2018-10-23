@@ -11,6 +11,18 @@ class BookmarkPresenter(private val interactor: BookmarkContract.Interactor,
 
     override fun attachView(viewModel: BookmarkContract.ViewModel, androidComponent: AndroidComponent) {
         super.attachView(viewModel, androidComponent)
+        interactor.setListener(this)
+
+        when (viewModel.state) {
+            BookmarkContract.State.IDLE -> obtainBookmarkList()
+            else -> {
+            }
+        }
+    }
+
+    override fun detachView() {
+        androidComponent = null
+        super.detachView()
     }
 
     override fun obtainBookmarkList() {
@@ -23,5 +35,6 @@ class BookmarkPresenter(private val interactor: BookmarkContract.Interactor,
 
     override fun onObtainBookmarkList(bookmarkList: List<Bookmark>) {
         viewModel!!.bookmarkList = bookmarkList
+        viewModel!!.state = BookmarkContract.State.INIT
     }
 }

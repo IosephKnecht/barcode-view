@@ -6,6 +6,8 @@ import com.project.iosephknecht.barcode_view.viper.viewModel.AbstractViewModel
 import com.project.iosephknecht.barcode_view.BR
 
 class DocumentInfoViewModel : AbstractViewModel(), DocumentInfoContract.ViewModel {
+    override var state = DocumentInfoContract.State.IDLE
+
     override var rootId: Long = -1
 
     override var description: String = ""
@@ -14,7 +16,4 @@ class DocumentInfoViewModel : AbstractViewModel(), DocumentInfoContract.ViewMode
             field = value
             notifyPropertyChanged(BR.description)
         }
-
-    //FIXME: abandonment in future
-    override var modelArray = byteArrayOf()
 }

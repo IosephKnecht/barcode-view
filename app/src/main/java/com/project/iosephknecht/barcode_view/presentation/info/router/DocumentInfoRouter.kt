@@ -14,7 +14,8 @@ class DocumentInfoRouter : AbstractRouter<DocumentInfoContract.RouterListener>()
             val fragment = findFragmentByTag(ViewFragment.TAG)
             if (fragment == null) {
                 beginTransaction()
-                    .replace(R.id.fragment_container, ViewFragment.newInstance(rootId))
+                    .replace(R.id.fragment_container, ViewFragment.newInstance(rootId), ViewFragment.TAG)
+                    .addToBackStack(null)
                     .commit()
             }
         }

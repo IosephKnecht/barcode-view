@@ -13,7 +13,8 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ViewModule(private val context: Context) {
+class ViewModule(private val context: Context,
+                 private val rootId: Long?) {
 
     @Provides
     @ModuleScope
@@ -24,7 +25,7 @@ class ViewModule(private val context: Context) {
     @Provides
     @ModuleScope
     fun providePresenter(interactor: ViewContract.Interactor): ViewContract.Presenter {
-        return ViewPresenter(interactor)
+        return ViewPresenter(interactor, rootId)
     }
 
     @Provides
