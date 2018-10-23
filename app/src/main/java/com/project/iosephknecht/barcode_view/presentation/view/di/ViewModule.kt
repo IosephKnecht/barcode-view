@@ -1,5 +1,8 @@
 package com.project.iosephknecht.barcode_view.presentation.view.di
 
+import android.content.Context
+import com.example.aamezencev.a3dviewer.di.DaggerViewerComponent
+import com.example.aamezencev.a3dviewer.di.ViewerComponent
 import com.project.iosephknecht.barcode_view.application.assembly.annotation.ModuleScope
 import com.project.iosephknecht.barcode_view.domain.services.DatabaseService
 import com.project.iosephknecht.barcode_view.presentation.view.ViewContract
@@ -10,7 +13,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ViewModule {
+class ViewModule(private val context: Context) {
 
     @Provides
     @ModuleScope
@@ -28,5 +31,14 @@ class ViewModule {
     @ModuleScope
     fun provideInteractor(databaseService: DatabaseService): ViewContract.Interactor {
         return ViewInteractor(databaseService)
+    }
+
+    @Provides
+    @ModuleScope
+    fun provideViewerLibrary(): ViewerComponent {
+        return DaggerViewerComponent
+            .builder()
+            .viewerModule(com.example.aamezencev.a3dviewer.di.ViewerModule(context))
+            .build()
     }
 }

@@ -31,7 +31,7 @@ class ViewFragment : AbstractFragment<ViewContract.ViewModel, ViewContract.Prese
 
     override fun injectDi() {
         diComponent = AppDelegate.presentationComponent
-            .viewSubcomponent(ViewModule())
+            .viewSubcomponent(ViewModule(context!!))
     }
 
     override fun createPresenter() = diComponent.getPresenter()
