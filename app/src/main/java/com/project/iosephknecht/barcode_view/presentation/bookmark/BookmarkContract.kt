@@ -10,7 +10,13 @@ import com.project.iosephknecht.barcode_view.viper.viewModel.MvpViewModel
 
 interface BookmarkContract {
 
+    enum class State {
+        IDLE, INIT
+    }
+
     interface ViewModel : MvpViewModel {
+        var state: State
+
         var bookmarkList: List<Bookmark>
             @Bindable get
     }
