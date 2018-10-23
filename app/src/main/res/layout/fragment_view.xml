@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.project.iosephknecht.barcode_view.presentation.view.viewModel.ViewViewModel" />
+            type="com.project.iosephknecht.barcode_view.presentation.view.ViewContract.ViewModel" />
     </data>
 
     <FrameLayout

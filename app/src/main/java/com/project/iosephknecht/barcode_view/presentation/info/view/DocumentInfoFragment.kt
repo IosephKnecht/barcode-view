@@ -24,7 +24,7 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
         const val TAG = "document_fragment_info"
 
         fun newInstance(barcodeValue: String) = DocumentInfoFragment().apply {
-            arguments?.apply {
+            arguments = Bundle().apply {
                 putString(BARCODE_VALUE, barcodeValue)
             }
         }
@@ -47,10 +47,14 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
     override fun onStart() {
         super.onStart()
 
+        bindingComponent.viewModel = viewModel!!
+
         val barcodeValue = arguments?.getString(BARCODE_VALUE, "")
 
+        presenter!!.obtainDocumentInfoModel(barcodeValue!!)
+
         view_btn.setOnClickListener {
-            presenter!!.obtainDocumentInfoModel(barcodeValue!!)
+            presenter!!.jumpToViewFragment(viewModel!!.rootId)
         }
     }
 }

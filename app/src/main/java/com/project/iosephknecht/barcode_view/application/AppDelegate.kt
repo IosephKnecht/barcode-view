@@ -8,6 +8,7 @@ import com.project.iosephknecht.barcode_view.application.assembly.module.Busines
 import com.project.iosephknecht.barcode_view.application.assembly.module.PresentationModule
 import com.project.iosephknecht.barcode_view.data.database.DaoMaster
 import com.project.iosephknecht.barcode_view.data.database.DaoSession
+import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 

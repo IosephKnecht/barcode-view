@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_host.*
 
 class HostFragment : Fragment() {
 
-    private val BARCODE_REQUEST_CODE = 221347
+    private val BARCODE_REQUEST_CODE = 22134
 
     companion object {
         const val TAG = "host_fragment"
