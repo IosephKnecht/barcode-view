@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.project.iosephknecht.barcode_view.R
+import com.project.iosephknecht.barcode_view.application.AppDelegate
 import com.project.iosephknecht.barcode_view.presentation.bookmark.BookmarkContract
 import com.project.iosephknecht.barcode_view.presentation.bookmark.di.BookmarkComponent
+import com.project.iosephknecht.barcode_view.presentation.bookmark.di.BookmarkModule
 import com.project.iosephknecht.barcode_view.viper.view.AbstractFragment
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 
@@ -23,7 +25,8 @@ class BookmarkFragment : AbstractFragment<BookmarkContract.ViewModel, BookmarkCo
     private lateinit var adapter: BookmarkAdapter
 
     override fun injectDi() {
-        // TODO: init BookmarkComponent
+        diComponent = AppDelegate.presentationComponent
+            .bookmarkSubmodule(BookmarkModule())
     }
 
     override fun createPresenter() = diComponent.getPresenter()

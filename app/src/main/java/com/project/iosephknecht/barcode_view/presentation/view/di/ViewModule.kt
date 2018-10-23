@@ -1,4 +1,32 @@
 package com.project.iosephknecht.barcode_view.presentation.view.di
 
+import com.project.iosephknecht.barcode_view.application.assembly.annotation.ModuleScope
+import com.project.iosephknecht.barcode_view.domain.services.DatabaseService
+import com.project.iosephknecht.barcode_view.presentation.view.ViewContract
+import com.project.iosephknecht.barcode_view.presentation.view.interactor.ViewInteractor
+import com.project.iosephknecht.barcode_view.presentation.view.presenter.ViewPresenter
+import com.project.iosephknecht.barcode_view.presentation.view.viewModel.ViewViewModel
+import dagger.Module
+import dagger.Provides
+
+@Module
 class ViewModule {
+
+    @Provides
+    @ModuleScope
+    fun provideViewModel(): ViewContract.ViewModel {
+        return ViewViewModel()
+    }
+
+    @Provides
+    @ModuleScope
+    fun providePresenter(interactor: ViewContract.Interactor): ViewContract.Presenter {
+        return ViewPresenter(interactor)
+    }
+
+    @Provides
+    @ModuleScope
+    fun provideInteractor(databaseService: DatabaseService): ViewContract.Interactor {
+        return ViewInteractor(databaseService)
+    }
 }

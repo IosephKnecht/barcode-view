@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.project.iosephknecht.barcode_view.R
+import com.project.iosephknecht.barcode_view.application.AppDelegate
 import com.project.iosephknecht.barcode_view.databinding.FragmentInfoBinding
 import com.project.iosephknecht.barcode_view.presentation.info.DocumentInfoContract
 import com.project.iosephknecht.barcode_view.presentation.info.di.DocumentInfoComponent
+import com.project.iosephknecht.barcode_view.presentation.info.di.DocumentInfoModule
 import com.project.iosephknecht.barcode_view.viper.view.AbstractFragment
 import kotlinx.android.synthetic.main.fragment_info.*
 
@@ -29,7 +31,8 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
     }
 
     override fun injectDi() {
-        //diComponent =
+        diComponent = AppDelegate.presentationComponent
+            .documentInfoSubmodule(DocumentInfoModule())
     }
 
     override fun createPresenter() = diComponent.getPresenter()

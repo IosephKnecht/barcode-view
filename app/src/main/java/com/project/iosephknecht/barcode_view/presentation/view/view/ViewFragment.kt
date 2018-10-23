@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.project.iosephknecht.barcode_view.R
+import com.project.iosephknecht.barcode_view.application.AppDelegate
 import com.project.iosephknecht.barcode_view.databinding.FragmentViewBinding
 import com.project.iosephknecht.barcode_view.presentation.view.ViewContract
 import com.project.iosephknecht.barcode_view.presentation.view.di.ViewComponent
+import com.project.iosephknecht.barcode_view.presentation.view.di.ViewModule
 import com.project.iosephknecht.barcode_view.viper.view.AbstractFragment
 
 class ViewFragment : AbstractFragment<ViewContract.ViewModel, ViewContract.Presenter>() {
@@ -28,7 +30,8 @@ class ViewFragment : AbstractFragment<ViewContract.ViewModel, ViewContract.Prese
     private lateinit var bindingComponent: FragmentViewBinding
 
     override fun injectDi() {
-        // diComponent =
+        diComponent = AppDelegate.presentationComponent
+            .viewSubcomponent(ViewModule())
     }
 
     override fun createPresenter() = diComponent.getPresenter()
