@@ -3,4 +3,5 @@
     <string name="preview_string">Hello! Get start scan QR code</string>
     <string name="scan_button_text">Scan QR - code</string>
     <string name="view_btn_text">Show model</string>
+    <string name="arrow">></string>
 </resources>
