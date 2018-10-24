@@ -30,18 +30,18 @@ class AppDelegate : MultiDexApplication() {
         initDatabase()
 
         appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule(this, daoSession))
-            .build()
+                .appModule(AppModule(this, daoSession))
+                .build()
 
         businessComponent = DaggerBusinessComponent.builder()
-            .appComponent(appComponent)
-            .businessModule(BusinessModule())
-            .build()
+                .appComponent(appComponent)
+                .businessModule(BusinessModule())
+                .build()
 
         presentationComponent = DaggerPresentationComponent.builder()
-            .businessComponent(businessComponent)
-            .presentationModule(PresentationModule())
-            .build()
+                .businessComponent(businessComponent)
+                .presentationModule(PresentationModule())
+                .build()
     }
 
     private fun initDatabase() {
@@ -51,8 +51,23 @@ class AppDelegate : MultiDexApplication() {
         daoSession = DaoMaster(database).newSession()
     }
 
+    private fun checkFolder() {
+        val file = File(applicationInfo.dataDir + "/databases/")
+        if (!file.exists()) file.mkdirs()
+    }
+
+    private fun checkFile() {
+        val file = File(applicationInfo.dataDir + "/databases/" + DATABASE_NAME)
+        if (!file.exists()) file.createNewFile()
+    }
+
+
     //FIXME: temp solve
     private fun copy(inputStream: InputStream) {
+
+        checkFolder()
+        checkFile()
+
         val outputStream = FileOutputStream(applicationInfo.dataDir + "/databases/" + DATABASE_NAME)
         val buffer = ByteArray(1024)
         var length = 0

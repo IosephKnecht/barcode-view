@@ -11,17 +11,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
 
-        <TextView
-            android:id="@+id/description_view"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="@{viewModel.description}"
-            tools:text="description" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/description_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.description}"
+                tools:text="description" />
+
+        </android.support.v4.widget.NestedScrollView>
 
         <Button
             android:id="@+id/view_btn"

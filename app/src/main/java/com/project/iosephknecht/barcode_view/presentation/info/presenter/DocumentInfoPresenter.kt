@@ -1,5 +1,6 @@
 package com.project.iosephknecht.barcode_view.presentation.info.presenter
 
+import com.project.iosephknecht.barcode_view.data.presentation.Bookmark
 import com.project.iosephknecht.barcode_view.data.presentation.DocumentInfo
 import com.project.iosephknecht.barcode_view.presentation.info.DocumentInfoContract
 import com.project.iosephknecht.barcode_view.viper.presenter.AbstractPresenter
@@ -8,7 +9,7 @@ import com.project.iosephknecht.barcode_view.viper.view.AndroidComponent
 class DocumentInfoPresenter(private val interactor: DocumentInfoContract.Interactor,
                             private val router: DocumentInfoContract.Router,
                             private val barcodeValue: String?) : AbstractPresenter<DocumentInfoContract.ViewModel>(),
-    DocumentInfoContract.Presenter, DocumentInfoContract.Listener {
+        DocumentInfoContract.Presenter, DocumentInfoContract.Listener {
 
     override fun attachView(viewModel: DocumentInfoContract.ViewModel, androidComponent: AndroidComponent) {
         super.attachView(viewModel, androidComponent)
@@ -39,9 +40,23 @@ class DocumentInfoPresenter(private val interactor: DocumentInfoContract.Interac
         router.showView(androidComponent!!, rootId)
     }
 
+    override fun addBookmark() {
+        with(viewModel!!) {
+            val bookmark = Bookmark(rootId, description)
+            interactor.saveBookmark(bookmark)
+        }
+    }
+
+    override fun showBookmarkList() {
+        router.showBookmarkList(androidComponent!!)
+    }
+
     override fun onObtainDocumentInfoModel(documentInfoModel: DocumentInfo) {
         viewModel!!.description = documentInfoModel.description!!
         viewModel!!.rootId = documentInfoModel.rootId
         viewModel!!.state = DocumentInfoContract.State.INIT
+    }
+
+    override fun onSaveBookmark(boolean: Boolean) {
     }
 }
