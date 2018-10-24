@@ -2,9 +2,7 @@ package com.project.iosephknecht.barcode_view.presentation.info.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.project.iosephknecht.barcode_view.R
 import com.project.iosephknecht.barcode_view.application.AppDelegate
 import com.project.iosephknecht.barcode_view.databinding.FragmentInfoBinding
@@ -34,12 +32,17 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
         val barcodeValue = arguments?.getString(BARCODE_VALUE, "")
 
         diComponent = AppDelegate.presentationComponent
-            .documentInfoSubmodule(DocumentInfoModule(barcodeValue))
+                .documentInfoSubmodule(DocumentInfoModule(barcodeValue))
     }
 
     override fun createPresenter() = diComponent.getPresenter()
 
     override fun createViewModel() = diComponent.getViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bindingComponent = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
@@ -54,5 +57,22 @@ class DocumentInfoFragment : AbstractFragment<DocumentInfoContract.ViewModel, Do
         view_btn.setOnClickListener {
             presenter!!.jumpToViewFragment(viewModel!!.rootId)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.bookmark_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.bookmark_add_btn -> {
+                presenter!!.addBookmark()
+            }
+            R.id.bookmark_list_dtn -> {
+                presenter!!.showBookmarkList()
+            }
+        }
+
+        return false
     }
 }
