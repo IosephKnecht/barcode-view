@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         if (fragment == null) {
             supportFragmentManager!!.beginTransaction()
-                .replace(R.id.fragment_container, HostFragment.newInstance(), HostFragment.TAG)
+                .add(R.id.fragment_container, HostFragment.newInstance(), HostFragment.TAG)
                 .addToBackStack(null)
                 .commit()
         }

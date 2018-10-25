@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="@dimen/padding_medium"
+    android:paddingEnd="@dimen/padding_high"
+    android:paddingStart="@dimen/padding_high"
+    android:paddingTop="@dimen/padding_medium"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/preview_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/preview_string"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Hello! Get start scan QR code" />
+        android:layout_centerVertical="true"/>
 
     <Button
         android:id="@+id/scan_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/scan_button_text"
+        android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Scan QR - code" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
