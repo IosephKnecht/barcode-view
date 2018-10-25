@@ -7,6 +7,12 @@ buildscript {
     ext.junit_version = '4.12'
     ext.runner_version = '1.0.2'
     ext.espresso_version = '3.0.2'
+    ext.multidex_version = '1.0.3'
+    ext.support_version = '27.1.1'
+    ext.greendao_version = '3.2.2'
+    ext.rxjava_version = '2.2.2'
+    ext.rxandroid_version = '2.1.0'
+    ext.gson_version = '2.8.5'
 
     repositories {
         google()
@@ -15,6 +21,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
